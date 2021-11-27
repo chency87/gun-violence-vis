@@ -1,0 +1,112 @@
+
+
+body{
+  /* background-color: #280137; */
+  background-color: #fff;
+}
+
+.bd-placeholder-img {
+  font-size: 1.125rem;
+  text-anchor: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+@media (min-width: 768px) {
+  .bd-placeholder-img-lg {
+    font-size: 3.5rem;
+  }
+}
+
+.footer {
+	/* background-color: aqua; */
+  align-items: center;
+}
+
+
+.map{
+  /* border: red 1px solid; */
+  /* background-color: red; */
+  margin: 100px 0 50px 0;
+
+}
+
+
+#states {
+  fill: none;
+}
+
+#states .active {
+  display:none;
+}
+
+#state-borders {
+  fill: none;
+  stroke: #fff;
+  stroke-width: 1.5px;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  pointer-events: none;
+}
+
+.county-boundary {
+  fill: #ddd;
+  stroke: #fff;
+  stroke-width: .2px;
+}
+
+
+#city-borders {
+    fill: none;
+    stroke: #fff;
+    stroke-width: 1.5px;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+    pointer-events: none;
+  
+}
+
+/* .county-boundary:hover{
+  fill: brown;
+} */
+
+#circle:hover{
+  stroke: 280137;
+  stroke-width: 4px;
+  fill: aquamarine;
+  cursor: grab;
+}
+
+
+.progress-scrubber {
+  /* border: red 1px solid; */
+  width: 100%;
+}
+.progress-form{
+  font: 12px var(--sans-serif);
+  font-variant-numeric: 
+  tabular-nums; 
+  display: flex; 
+  height: auto; 
+  align-items: center;
+  width: 100%;
+  /* background-color: red; */
+}
+.progress-status-btn{
+  margin-right: 0.4em; 
+  width: 5em;
+}
+.progress-input{
+  width: 100%;
+  min-width: 780px;
+  /* background-color: rgb(212, 228, 198); */
+  border: 1px red solid;
+}
+
+.progress-output{
+  width: 20%;
+  /* min-width: 780px; */
+  /* background-color: rgb(212, 228, 198); */
+}

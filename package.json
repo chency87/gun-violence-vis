@@ -1,0 +1,14 @@
+{
+  "name": "gun_violence",
+  "version": "1.0.0",
+  "description": "visualization of gun violence in USA",
+  "main": "index.html",
+  "author": "",
+  "license": "ISC",
+  "scripts": {
+    "server": "live-server ./ --port=8181 --host=localhost --proxy=/api:http://www.abc.com/api/"
+  },
+  "devDependencies": {
+    "live-server": "^1.2.1"
+  }
+}
