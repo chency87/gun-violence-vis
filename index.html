@@ -1,89 +1,103 @@
-<!DOCTYPE html>
+<!doctype html>
+<html lang="en" class="h-100">
 
 <head>
-  <meta charset="utf-8">
-  <title>GUN VIOLENCE</title>
-  <link rel="stylesheet" href="./core/css/bootstrap.min.css" type="text/css" />
-  <link rel="stylesheet" type="text/css" href="./core/css/style.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="un Violence VIS">
+    <meta name="author" content="Chunyu Chen, Danrui Qi, Jiuwei Wang">
+
+    <title>GUN VIOLENCE VIS</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="./core/css/bootstrap.min.css" type="text/css" />
+
+
+    <meta name="theme-color" content="#7952b3">
+
+
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" type="text/css" href="./core/css/style.css">
+
+
+
+
 </head>
 
-<body class="d-flex flex-column h-100">
-  <header>
-    <!-- Fixed navbar -->
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-      <a class="navbar-brand" href="#">GUN VIOLENCE</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
-        aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarCollapse">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-          </li>
-        </ul>
-        <form class="form-inline mt-2 mt-md-0">
-          <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
-      </div>
-    </nav>
-  </header>
+<body class="d-flex h-100 text-center text-white bg-dark">
 
-  <!-- Begin page content -->
-  <main role="main" class="container">
-    <!-- <div class="container"> -->
-    <div class="row map">
-      <div class="col-8">
-        <div class="uStates"></div>
-      </div>
+    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+        <!-- cover-container d-flex w-100 h-100 p-3 mx-auto flex-column -->
+        <header class="mb-5">
+            <div>
+                <nav class="nav nav-masthead justify-content-center float-md-end">
+                    <h3 class="float-md-start mb-0">GUN VIOLENCE VIS</h3>
+                    <!-- <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    <a class="nav-link" href="#">Features</a>
+                    <a class="nav-link" href="#">Contact</a> -->
+                </nav>
+            </div>
+        </header>
 
+        <main class="main" role="main">
+            <div class="row w-100">
+                <!-- <div class="row justify-content-md-center bg-dark"> -->
+                <div class="col col-md-2 offset-md-3 ">
+                    <div id="peoplebox" class="peoplebox">
+                        <span id="peoplecount" onselectstart="return false;">11,356</span>
+                        <br>
+                        <span id="peoplelabel" onselectstart="return false;">PEOPLE INVOLVED</span>
+                    </div>
+                </div>
+                <div class="col col-md-2">
+
+                </div>
+                <div class="col col-lg-2">
+                    <div id="peoplebox" class="peoplebox">
+                        <span id="peoplekilledcount" onselectstart="return false;">11,356</span>
+                        <br>
+                        <span id="peoplekilledlabel" onselectstart="return false;">PEOPLE KILLED</span>
+                    </div>
+                </div>
+            </div>
+            <!-- US MAP  -->
+            <div class="row justify-content-md-center">
+                <!-- <div class="col col-md-10 bg-light"> -->
+                    <div class="uStates"></div>
+                <!-- </div> -->
+            </div>
+            <!-- Date Line  -->
+            <div class="row justify-content-md-center">
+                <div class="col col-md-10">
+                    <div class="progress-scrubber">
+                        <form class="progress-form">
+                            <button id="progress-status-btn" class="progress-status-btn" name="b" type="button"
+                                style="margin-right: 0.4em; width: 4em;"></button>
+                            <label style="display: flex; align-items: center; width: 100%;">
+                                <input type="range" min=0 max=755 value=12 step=1 class="progress-input"
+                                    id="progress-input" ">
+                              <output style=" margin-left: 0.4em;" id="progress-output"></output>
+                            </label>
+                        </form>
+                    </div>
+
+                </div>
+
+            </div>
+        </main>
+
+        <footer class="mt-auto text-white-50 fixed-bottom">
+            <p>CMPT 767 Visualization template for <a href="https://getbootstrap.com/" class="text-white">GUN
+                    VIOLENCE</a>, by <a href="#" class="text-white">@Chunyu Chen</a>,<a href="#"
+                    class="text-white">@Danrui Qi</a>,<a href="#" class="text-white">@Jiuwei Wang</a>.</p>
+        </footer>
     </div>
-    <!-- <div class="row justify-content-md-center">
-        <div class="col-8">
-          <div class="progress">
-            <div class="progress-bar progress-bar-danger progress-value"></div>
-          </div>
-        </div>
-      </div> -->
-    <div class="row justify-content-md-center">
-      <div class="progress-scrubber">
-        <form class="progress-form">
-          <button id="progress-status-btn" class="progress-status-btn" name="b" type="button"
-            style="margin-right: 0.4em; width: 5em;"></button>
-          <label style="display: flex; align-items: center;">
-            <input type="range" min=0 max=755 value=12 step=1 class="progress-input" id="progress-input" ">
-              <output style=" margin-left: 0.4em;" id="progress-output"></output>
-          </label>
-        </form>
-      </div>
-    </div>
 
-    <div class="row">
-      <div class="col-8">
-        <div class="calendar"></div>
-      </div>
 
-    </div>
 
-    </div>
-
-    <!-- </div> -->
-
-    </div>
-  </main>
-  <!-- <footer class="footer mt-auto py-3 fixed-bottom">
-    <div class="container">
-      <span class="text-muted">Place sticky footer content here.</span>
-    </div>
-  </footer> -->
 </body>
+
+
 <script type="text/javascript" src="./core/js/jquery-2.2.3.min.js"></script>
 <!-- <script type="text/javascript" src="./core/js/d3.min.js"></script> -->
 
@@ -98,194 +112,37 @@
 <script type="text/javascript" src="./core/js/gun-violence-vis.js"></script>
 <script type="text/javascript" src="./core/js/scrubber.js"></script>
 
-
 <script>
-
-</script>
-
-<script type="text/javascript">
-
-
-
-</script>
-
-<script>
-  // // 
-  // const zoom = d3.behavior.zoom()
-  //       .scaleExtent([1, 8])
-  //       .on("zoom", zoomed);
-  // var margin = {
-  //   top: 10,
-  //   bottom: 10,
-  //   left: 10,
-  //   right: 10
-  // }, width = width = parseInt(d3.select('.uStates').style('width')),
-  //   width = width - margin.left - margin.right
-  //   , mapRatio = 0.5
-  //   , height = width * mapRatio
-  //   , active = d3.select(null);
-  // var maptype = 'topojson'
-  // var width = 960,
-  //   height = 600
-  // var projection = d3.geo.albersUsa()
-  //   .scale(1280)
-  //   .translate([width / 2, height / 2]);
-  // var path = d3.geo.path()
-  //   .projection(projection);
-  // var svg = d3.select(".uStates").append("svg")
-  //   .attr("width", width)
-  //   .attr("height", height);
-  // var g = svg.append("g")
-  //   .attr('class', 'center-container center-items us-state')
-  //   .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
-  //   .attr('width', width + margin.left + margin.right)
-  //   .attr('height', height + margin.top + margin.bottom)
-
-  // d3.csv("/datasets/gun.csv")
-
-  // d3.csv("/core/us-counties.topojson", function(us){
-  //   console.log(us)
-  //   // d3.csv("/core/datasets/gun.csv", function(gun){
-
-  //   //   var timeParse = d3.timeFormat("%Y-%m-%d");
-  //   //   var start = d3.extent(gun, d => d.date)[0]
-  //   //   var end = d3.extent(gun, d => d.date)[1]
-  //   //   span = d3.time.weeks(timeParse.parse(start),timeParse.parse(end),2)
-      
-  //   //   date = Scrubber(span, {format: d3.timeFormat("%Y-%m-%d"), loop: false})
-
-
-  
-  //   //   chart = us_chart(us,gun)
-
-  //   //   document.getElementById('progress-input').addEventListener('input',function(e){
-  //   //     // console.log(e.detail['date'])
-  //   //     // let date = e.detail['date']
-  //   //     let date = document.getElementById('progress-output').value
-  //   //     chart.update(date)
-
-  //   //   },);
-
-
-  //   //   Calendar(gun, {
-  //   //     x: d => d.Date,
-  //   //     y: d => d.n_killed,
-  //   //     weekday: "sunday",
-  //   //     width: 960
-  //   //   })
- 
-
-  //   // })
-  // })
-
-  async function loadData(){
-    const us = await d3.json("/core/us-counties.topojson")
-    const gun = await d3.csv("/datasets/gun.csv")
-
-    const participant_gender = await d3.csv("/datasets/sum_of_participants_detail.csv")
-
-    BarChart(participant_gender)
-
-    var parseTime = d3.timeParse("%Y-%m-%d");
+    async function drawUsMap(){
+        const us = await d3.json("/core/us-counties.topojson")
+        chart = us_chart(us)
+        return chart
+    }
     
-    var start = parseTime("2013-01-01")
-    var end = parseTime("2018-03-31")
 
-    
-    const span = d3.timeDay.every(2).range(start,end)
-    // console.log(span)
+    async function loadData(chart) {
+        // const us = await d3.json("/core/us-counties.topojson")
+        const gun = await d3.csv("/datasets/gun.csv")
 
-    
-    // date = Scrubber(span, {format: d3.timeFormat("%Y-%m-%d"), loop: false})
-    date = Scrubber(span, {format: d3.timeFormat("%Y-%m-%d"), loop: false})
- 
-    chart = us_chart(us,gun)
+        const participant_gender = await d3.csv("/datasets/sum_of_participants_detail.csv")
 
-    document.getElementById('progress-input').addEventListener('input',function(e){
-      // console.log(e.detail['date'])
-      // let date = e.detail['date']
-      let date = document.getElementById('progress-output').value
-      chart.update(date)
+        var parseTime = d3.timeParse("%Y-%m-%d");
+        var start = parseTime("2013-01-01")
+        var end = parseTime("2018-03-31")
+        const span = d3.timeDay.every(2).range(start, end)
+        date = Scrubber(span, { format: d3.timeFormat("%Y-%m-%d"), loop: false })
+       
+        gun_events_chart = gun_violence_chart(chart,gun)
 
-    },);
+        document.getElementById('progress-input').addEventListener('input', function (e) {
+            let date = document.getElementById('progress-output').value
+            gun_events_chart.update(date)
 
-
-    // Calendar(gun, {
-    //   x: d => d.Date,
-    //   y: d => d.n_killed,
-    //   weekday: "sunday",
-    //   width: 960
-    // })
-
-  }
-  loadData()
-
-  
-
-  // const format = d3.format(",.0f")
-  // position = [{
-  //   id: 1,
-  //   position: projection([-79.8559,40.3467]),
-  //   title: ' Murray',
-  //   value: 30
-  // }]
-  // const radius = d3.scale.sqrt([0, d3.max(position, d => d.value)], [0, 40])
-  // svg.append("g")
-  //     .attr("fill", "brown")
-  //     .attr("fill-opacity", 0.5)
-  //     .attr("stroke", "#fff")
-  //     .attr("stroke-width", 0.5)
-  //   .selectAll("circle")
-  //   .data(position
-  //       .filter(d => d.position)
-  //       .sort((a, b) => d3.descending(a.value, b.value)))
-  //   .enter()
-  //   .append("circle")
-
-  //     .attr("transform", d => `translate(${d.position})`)
-  //     .attr("r", d => radius(d.value))
-  //   .append("title")
-  //     .text(d => `${d.title}${format(d.value)}`);
-  // svg
-  //   .call(zoom)
-  //   .call(zoom.event);
-
-
-  function reset() {
-    active.classed("active", false);
-    active = d3.select(null);
-
-    g.transition()
-      .delay(100)
-      .duration(750)
-      .style("stroke-width", "1.5px")
-      .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
-
-  }
-
-  function mouseover(d) {
-    // active.classed("active", false);
-    // active = d3.select(this).classed("active", true);
-  }
-  function mouseout(d) {
-    // active.classed("active", false);
-    // active = d3.select(this).classed("active", false);
-  }
-  function zoomed() {
-
-    // g.style("stroke-width", 1.5 / d3.event.scale + "px");
-    // g.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
-
-    //  g.transition()
-    //     .duration(750)
-    //     .style("stroke-width", 1.5 / d3.event.scale + "px")
-    //     .attr("transform", "translate(" + d3.event.translate  + ")scale(" + d3.event.scale + ")");
-  }
-  // function radius(data){
-  //   return d3.scale.sqrt([0, d3.max(data, d => d.value)], [0, 40])
-  // }
-
-
+        });
+    }
+    drawUsMap().then(chart =>{
+        loadData(chart)
+    }) 
 
 </script>
 

@@ -86,4 +86,3 @@ function Scrubber(values, {
     return 'form';
 }
 
-
