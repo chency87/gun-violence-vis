@@ -129,7 +129,7 @@
         var parseTime = d3.timeParse("%Y-%m-%d");
         var start = parseTime("2013-01-01")
         var end = parseTime("2018-03-31")
-        const span = d3.timeDay.every(2).range(start, end)
+        const span = d3.timeDay.every(4).range(start, end)
         date = Scrubber(span, { format: d3.timeFormat("%Y-%m-%d"), loop: false })
        
         gun_events_chart = gun_violence_chart(chart,gun)
