@@ -124,7 +124,10 @@ gun_violence_chart = function (svg, gun) {
             var parseTime = d3.timeParse("%Y-%m-%d");
             date = parseTime(date)
             dot // enter
-                .filter(d => parseTime(d.date) > previousDate && parseTime(d.date) <= date)
+                .filter(d => {
+                    
+                    return parseTime(d.date) > previousDate && parseTime(d.date) <= date
+                })
                 .attr("display","block")
                 .transition().attr("r", d => radius(d.n_killed)).attr("fill", "red");
             dot // exit

@@ -63,7 +63,7 @@
             <!-- US MAP  -->
             <div class="row justify-content-md-center">
                 <!-- <div class="col col-md-10 bg-light"> -->
-                    <div class="uStates"></div>
+                <div class="uStates"></div>
                 <!-- </div> -->
             </div>
             <!-- Date Line  -->
@@ -113,36 +113,33 @@
 <script type="text/javascript" src="./core/js/scrubber.js"></script>
 
 <script>
-    async function drawUsMap(){
+    async function drawUsMap() {
         const us = await d3.json("/core/us-counties.topojson")
         chart = us_chart(us)
         return chart
     }
-    
+
 
     async function loadData(chart) {
         // const us = await d3.json("/core/us-counties.topojson")
         const gun = await d3.csv("/datasets/gun.csv")
-
-        const participant_gender = await d3.csv("/datasets/sum_of_participants_detail.csv")
-
-        var parseTime = d3.timeParse("%Y-%m-%d");
-        var start = parseTime("2013-01-01")
-        var end = parseTime("2018-03-31")
-        const span = d3.timeDay.every(4).range(start, end)
-        date = Scrubber(span, { format: d3.timeFormat("%Y-%m-%d"), loop: false })
-       
-        gun_events_chart = gun_violence_chart(chart,gun)
-
-        document.getElementById('progress-input').addEventListener('input', function (e) {
-            let date = document.getElementById('progress-output').value
-            gun_events_chart.update(date)
-
-        });
+        return gun
     }
-    drawUsMap().then(chart =>{
-        loadData(chart)
-    }) 
+    drawUsMap().then(chart => {
+        loadData(chart).then(gun => {
+            var parseTime = d3.timeParse("%Y-%m-%d");
+            var start = parseTime("2013-01-01")
+            var end = parseTime("2018-03-31")
+            const span = d3.timeDay.every(4).range(start, end)
+            date = Scrubber(span, { format: d3.timeFormat("%Y-%m-%d"), loop: false })
+            gun_events_chart = gun_violence_chart(chart, gun)
+            document.getElementById('progress-input').addEventListener('input', function (e) {
+                let date = document.getElementById('progress-output').value
+                gun_events_chart.update(date)
+            });
+
+        })
+    })
 
 </script>
 

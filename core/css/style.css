@@ -85,7 +85,9 @@ body {
   height: 120px;
   text-align: left;
   /* margin-left: 250px; */
-  
+}
+#peoplebox :hover{
+  cursor: pointer;
 }
 #yearsbox {
   /* position: absolute; */
@@ -129,13 +131,6 @@ body {
   
 }
 
-/* .states:hover {
-  
-  fill: rgba(233, 98, 98, 0.774);
-  cursor: pointer;
-
-} */
-
 #state-borders {
   fill: none;
   stroke: #fff;
@@ -150,6 +145,7 @@ body {
   margin-top: 25px;
   width: 100%;
 }
+
 .progress-form{
   font: 12px var(--sans-serif);
   font-variant-numeric: 
