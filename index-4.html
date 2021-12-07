@@ -64,12 +64,12 @@
           <div class="row w-100 justify-content-md-center">
             <div class="col-8">
               <h4 class="chart-title">
-                Relation between gender and suspect in past years
+                The trends of different types of shooting events in past years
               </h4>
             </div>
           <div class="row w-100 justify-content-md-center">
             <div class="col-8">
-              <div id="bar-chart"></div>
+              <div id="chart"></div>
             </div>
 
           </div>
@@ -78,8 +78,8 @@
 
         <footer class="mt-auto text-white-50 fixed-bottom">
           <a href="/index.html" class="btn btn-secondary btn-sm " role="button" aria-pressed="true">Distribution</a>
-                <a href="/index-4.html" class="btn btn-secondary btn-sm " role="button" aria-pressed="true">Trends</a>
-                <a href="/index-2.html" class="btn btn-secondary btn-sm active" role="button" aria-pressed="true">Hot</a>
+                <a href="/index-4.html" class="btn btn-secondary btn-sm active" role="button" aria-pressed="true">Trends</a>
+                <a href="/index-2.html" class="btn btn-secondary btn-sm " role="button" aria-pressed="true">Suspect</a>
             <p>CMPT 767 Visualization template for <a href="https://getbootstrap.com/" class="text-white">GUN
                     VIOLENCE</a>, by <a href="#" class="text-white">@Chunyu Chen</a>,<a href="#"
                     class="text-white">@Danrui Qi</a>,<a href="#" class="text-white">@Jiuwei Wang</a>.</p>
@@ -113,7 +113,7 @@
     }
 
     loadData().then(gun =>{
-      draw_bar_chart(gun)
+      draw_line_chart(gun)
 
     })
 

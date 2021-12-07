@@ -203,6 +203,17 @@ async function updatePeopleCount(gun, endDate) {
     $("#progressinjuredcount").css({
         height: (male_injured_count) / injured_count * 100 +'%'
     })
+    $("#tooltiptotalcount").text(((male_killed_count + male_injured_count) / total_count * 100).toFixed(2) +'%')
+    
+    $("#tooltiptotalfemalecount").text((100 - ((male_killed_count + male_injured_count) / total_count * 100).toFixed(2)) +'%')
+
+    $("#tooltipkilledcount").text(((male_killed_count ) / killed_count * 100).toFixed(2) +'%')
+    
+    $("#tooltipkilledfemalecount").text((100 - ((male_killed_count ) / killed_count * 100).toFixed(2)) +'%')
+
+    $("#tooltipinjuredcount").text(((male_injured_count ) / injured_count * 100).toFixed(2) +'%')
+    
+    $("#tooltipinjuredfemalecount").text((100 - ((male_injured_count ) / injured_count * 100).toFixed(2)) +'%')
 }
 
 

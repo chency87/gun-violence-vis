@@ -19,31 +19,10 @@
     <!-- Custom styles for this template -->
     <link rel="stylesheet" type="text/css" href="./core/css/style.css">
 
+
+
+
 </head>
-<style>
-    svg {
-        font-family: Sans-Serif, Arial;
-    }
-    .line {
-        stroke-width: 2;
-        fill: none;
-    }
-    
-    .axis path {
-        stroke: white;
-    }
-
-    .text {
-        font-size: 12px;
-    }
-
-    .title-text {
-        font-size: 12px;
-    }
-    .chart-title {
-      color: burlywood;
-    }
-</style>
 
 <body class="d-flex h-100 text-center text-white bg-dark">
 
@@ -53,33 +32,41 @@
             <div>
                 <nav class="nav nav-masthead justify-content-center float-md-end">
                     <h3 class="float-md-start mb-0">GUN VIOLENCE VIS</h3>
-                    <!-- <a class="nav-link active" aria-current="page" href="#">Home</a>
-                    <a class="nav-link" href="#">Features</a>
-                    <a class="nav-link" href="#">Contact</a> -->
                 </nav>
             </div>
         </header>
 
         <main class="main" role="main">
-          <div class="row w-100 justify-content-md-center">
-            <div class="col-8">
-              <h4 class="chart-title">
-                Relation between gender and suspect in past years
-              </h4>
-            </div>
-          <div class="row w-100 justify-content-md-center">
-            <div class="col-8">
-              <div id="bar-chart"></div>
+            <div class="row">
+                <div class="col-4 offset-md-4">
+                    <div class="perspective">
+                        <div class="book-wrap">
+                            <div class="page book-content">end</div>
+                            <div class="page book-content book-content1">第三页</div>
+                            <div class="page book-content book-content2">第二页</div>
+                            <div class="page book-content book-content3">第一页</div>
+                            <div class="page book-cover">Memmory</div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-          </div>
-           
+            <!-- Mass Shooting -->
+            <!-- Officer -->
+
+      
+            <!-- Shot - Wounded/Injured||Mass Shooting (4+ victims injured or killed excluding the subject/suspect/perpetrator, one location)||Possession (gun(s) found during commission of other crimes)||Possession of gun by felon or prohibited person" -->
+  
         </main>
 
         <footer class="mt-auto text-white-50 fixed-bottom">
-          <a href="/index.html" class="btn btn-secondary btn-sm " role="button" aria-pressed="true">Distribution</a>
-                <a href="/index-4.html" class="btn btn-secondary btn-sm " role="button" aria-pressed="true">Trends</a>
-                <a href="/index-2.html" class="btn btn-secondary btn-sm active" role="button" aria-pressed="true">Hot</a>
+<!-- 
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <button type="button" class="btn btn-primary">Left</button>
+                <button type="button" class="btn btn-primary">Middle</button>
+                <button type="button" class="btn btn-primary">Right</button>
+            </div> -->
+
             <p>CMPT 767 Visualization template for <a href="https://getbootstrap.com/" class="text-white">GUN
                     VIOLENCE</a>, by <a href="#" class="text-white">@Chunyu Chen</a>,<a href="#"
                     class="text-white">@Danrui Qi</a>,<a href="#" class="text-white">@Jiuwei Wang</a>.</p>
@@ -92,31 +79,27 @@
 
 
 <script type="text/javascript" src="./core/js/jquery-2.2.3.min.js"></script>
-<!-- <script type="text/javascript" src="./core/js/d3.min.js"></script> -->
 
-<!-- <script src="http://d3js.org/d3.v3.min.js"></script> -->
 <script src="https://d3js.org/d3.v7.min.js"></script>
-<script src="https://d3js.org/d3-queue.v3.min.js"></script>
-<!-- <script src="http://d3js.org/queue.v1.min.js"></script> -->
 <script src="http://d3js.org/topojson.v3.min.js"></script>
 
-<script type="text/javascript" src="./core/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="./core/js/papaparse.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+
+<script type="text/javascript" src="./core/css/bootstrap-4.6.0-dist/js/bootstrap.bundle.js"></script>
+<!-- <script type="text/javascript" src="./core/js/bootstrap.min.js"></script> -->
+
 <script type="text/javascript" src="./core/js/gun-violence-vis-index-3.js"></script>
 <script type="text/javascript" src="./core/js/scrubber.js"></script>
 
 <script>
-   async function loadData() {
-        // const us = await d3.json("/core/us-counties.topojson")
-        const gun = await d3.csv("/datasets/gun.csv")
-        return gun
-    }
-
-    loadData().then(gun =>{
-      draw_bar_chart(gun)
-
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+        // $('#peopletotalcount').tooltip()
     })
+    
+   
 
 </script>
+
 
 </html>
