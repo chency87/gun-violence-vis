@@ -40,23 +40,50 @@
         </header>
 
         <main class="main" role="main">
-            <div class="row w-100">
+            <div class="row w-100 justify-content-md-center">
                 <!-- <div class="row justify-content-md-center bg-dark"> -->
-                <div class="col col-md-2 offset-md-3 ">
-                    <div id="peoplebox" class="peoplebox">
-                        <span id="peoplecount" onselectstart="return false;">11,356</span>
+                <div class="col col-2 ">
+                    <div id="peoplebox" class="peoplebox" data-toggle="tooltip" data-placement="bottom" data-html="true" title="<em>Male:</em> <b>$('#progressinjuredcount').css('height')</b> <br> <em>Female:</em> <b>ss</b>">
+                        <span id="peoplelabel" onselectstart="return false;">PEOPLE INVOLVED:</span>
                         <br>
-                        <span id="peoplelabel" onselectstart="return false;">PEOPLE INVOLVED</span>
+                        <span class="peoplecount" id="peoplecount" >0</span>
+                        <span class="progress progress-bar-vertical">
+                            <div class="progress-bar progress-bar-striped progress-bar-animated bg-secondary" id="progresstotalcount" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" >
+                              
+                            </div>
+                        </span>
+                        
                     </div>
                 </div>
-                <div class="col col-md-2">
+                <div class="col col-2 ">
+                    <div id="peoplebox" class="peoplebox" data-toggle="popover" data-placement="bottom" data-trigger="hover">
+                        <span id="peoplekilledlabel" onselectstart="return false;">PEOPLE KILLED:</span>
+                        <br>
+                        <span id="peoplekilledcount">0</span>
+
+                        <span class="progress progress-bar-vertical">
+                            <span class="progress-bar progress-bar-striped progress-bar-animated bg-danger" id="progresskilledcount" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                            </span>
+                        </span>
+                    </div>
+            
 
                 </div>
-                <div class="col col-lg-2">
-                    <div id="peoplebox" class="peoplebox">
-                        <span id="peoplekilledcount" onselectstart="return false;">11,356</span>
+                <div class="col col-2">
+
+                    <div id="peoplebox" class="peoplebox" data-toggle="popover" data-placement="bottom" data-trigger="hover">
+                        <span id="peopleinjuredlabel" onselectstart="return false;">PEOPLE INJURED:</span>
                         <br>
-                        <span id="peoplekilledlabel" onselectstart="return false;">PEOPLE KILLED</span>
+                      
+                        <span id="peopleinjuredcount" data-toggle="popover" data-placement="bottom" data-trigger="hover">0</span>                  
+                        <span class="progress progress-bar-vertical">
+                            <span class="progress-bar progress-bar-striped progress-bar-animated bg-warning" id="progressinjuredcount" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                             
+                            </span>
+                        </span>
+                      
+
+                        <!-- <a href="#" data-toggle="popover" title="Popover Header" data-content="Some content inside the popover">Toggle popover</a> -->
                     </div>
                 </div>
             </div>
@@ -87,6 +114,13 @@
         </main>
 
         <footer class="mt-auto text-white-50 fixed-bottom">
+<!-- 
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <button type="button" class="btn btn-primary">Left</button>
+                <button type="button" class="btn btn-primary">Middle</button>
+                <button type="button" class="btn btn-primary">Right</button>
+            </div> -->
+
             <p>CMPT 767 Visualization template for <a href="https://getbootstrap.com/" class="text-white">GUN
                     VIOLENCE</a>, by <a href="#" class="text-white">@Chunyu Chen</a>,<a href="#"
                     class="text-white">@Danrui Qi</a>,<a href="#" class="text-white">@Jiuwei Wang</a>.</p>
@@ -99,20 +133,41 @@
 
 
 <script type="text/javascript" src="./core/js/jquery-2.2.3.min.js"></script>
-<!-- <script type="text/javascript" src="./core/js/d3.min.js"></script> -->
 
-<!-- <script src="http://d3js.org/d3.v3.min.js"></script> -->
 <script src="https://d3js.org/d3.v7.min.js"></script>
-<script src="https://d3js.org/d3-queue.v3.min.js"></script>
-<!-- <script src="http://d3js.org/queue.v1.min.js"></script> -->
 <script src="http://d3js.org/topojson.v3.min.js"></script>
 
-<script type="text/javascript" src="./core/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="./core/js/papaparse.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+
+<script type="text/javascript" src="./core/css/bootstrap-4.6.0-dist/js/bootstrap.bundle.js"></script>
+<!-- <script type="text/javascript" src="./core/js/bootstrap.min.js"></script> -->
+
 <script type="text/javascript" src="./core/js/gun-violence-vis.js"></script>
 <script type="text/javascript" src="./core/js/scrubber.js"></script>
 
 <script>
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+    
+    $(document).ready(function () {
+        $('[data-toggle="popover"]').popover({
+            html: true,
+            title: title(),
+            delay: { show: 500, hide: 1000 },
+            content: function () {
+                console.log(this)
+                return content();
+            }
+        });
+    });
+    function title(){
+        return 'title'
+    }
+    function content(){
+        return 'content'
+    }
+
     async function drawUsMap() {
         const us = await d3.json("/core/us-counties.topojson")
         chart = us_chart(us)
@@ -125,18 +180,25 @@
         const gun = await d3.csv("/datasets/gun.csv")
         return gun
     }
+
     drawUsMap().then(chart => {
+        var parseTime = d3.timeParse("%Y-%m-%d");
+        var start = parseTime("2013-01-01")
+        var end = parseTime("2018-03-31")
+        const span = d3.timeDay.every(4).range(start, end)
+        date = Scrubber(span, { format: d3.timeFormat("%Y-%m-%d"), loop: false })
+
         loadData(chart).then(gun => {
-            var parseTime = d3.timeParse("%Y-%m-%d");
-            var start = parseTime("2013-01-01")
-            var end = parseTime("2018-03-31")
-            const span = d3.timeDay.every(4).range(start, end)
-            date = Scrubber(span, { format: d3.timeFormat("%Y-%m-%d"), loop: false })
-            gun_events_chart = gun_violence_chart(chart, gun)
+
+            /* draw the gun violence event on the map */
+            // gun_events_chart = gun_violence_chart(chart, gun)
             document.getElementById('progress-input').addEventListener('input', function (e) {
                 let date = document.getElementById('progress-output').value
-                gun_events_chart.update(date)
+                updatePeopleCount(gun, date)
+                // gun_events_chart.update(date)
             });
+
+            // new Scrubbing ( document.querySelector ( '#peoplecount') );
 
         })
     })

@@ -40,17 +40,17 @@ us_chart = function (us) {
         .on("mouseout", function (d, i) {
             d3.select(this)
                 .style("fill", "rgb(212, 211, 211)")
-                .style("cursor", "pointer");  
+                .style("cursor", "pointer");
         })
-        // .on("click",clicked)
-        
+    // .on("click",clicked)
+
     g.append("path")
         .datum(topojson.mesh(us, us.objects.states, (a, b) => a !== b))
         .attr("fill", "none")
         .attr("stroke", "white")
         .attr("stroke-linejoin", "round")
         .attr("d", path)
-        .attr("class","state-borders")
+        .attr("class", "state-borders")
 
 
     // const zoom = d3.zoom()
@@ -84,7 +84,7 @@ us_chart = function (us) {
     //       d3.pointer(event, svg.node())
     //     );
     //   }
-   
+
     return svg
 }
 
@@ -125,19 +125,90 @@ gun_violence_chart = function (svg, gun) {
             date = parseTime(date)
             dot // enter
                 .filter(d => {
-                    
+
                     return parseTime(d.date) > previousDate && parseTime(d.date) <= date
                 })
-                .attr("display","block")
+                .attr("display", "block")
                 .transition().attr("r", d => radius(d.n_killed)).attr("fill", "red");
             dot // exit
                 .filter(d => parseTime(d.date) <= previousDate && parseTime(d.date) > date)
-                .attr("display","none")
+                .attr("display", "none")
             previousDate = date;
         }
     });
+}
 
+async function updatePeopleCount(gun, endDate) {
+    var parseTime = d3.timeParse("%Y-%m-%d");
+    let killed_count = 0, injured_count = 0, total_count = 0;
+    date = parseTime(endDate)
+    filtered_data = gun.filter(d => parseTime(d.date) <= date)
+    let male_killed_count = 0, female_killed_count =0, male_injured_count = 0, female_injured_count = 0;
+    killed_count = d3.sum(filtered_data, d => {
+        let gender_arr = d.participant_gender.split("||")
+        let status_arr = d.participant_status.split("||")
+        let gender_dict = []
+        gender_arr.forEach(element => {
+            gender_dict[element.split("::")[0]] = element.split("::")[1]
+            
+        });  
+        status_arr.forEach(ele =>{
+            let tmp = ele.split("::")
+            if(tmp[1] === "Injured"){
+                if(gender_dict[tmp[0]] !== "Male"){
+                    female_injured_count = female_injured_count + 1
+                }else{
+                    male_injured_count = male_injured_count + 1
+                }
+            }else if (tmp[1] === "Killed"){
+                if(gender_dict[tmp[0]] !== "Male"){
+                    female_killed_count = female_killed_count + 1
+                }else{
+                    male_killed_count = male_killed_count + 1
+                }
+            }
+        })
+        return d.n_killed
+    })
+    injured_count = d3.sum(filtered_data, d => {
+        return d.n_injured
+    })
+
+    total_count = killed_count + injured_count
+
+    d3.select("body")
+        .selectAll("#peoplecount")
+        .datum(total_count)
+        .text(function (d) {
+            return thousands(d);
+        })
+    d3.select("body")
+        .selectAll("#peoplekilledcount")
+        .data([killed_count])
+        .text(function (d) {
+            return thousands(d);
+        })
+    d3.select("body")
+        .selectAll("#peopleinjuredcount")
+        .data([injured_count])
+        .text(function (d) {
+            return thousands(d);
+        })
+    $("#progresstotalcount").css({
+        height: (male_killed_count + male_injured_count) / total_count * 100 +'%'
+    })
+    $("#progresskilledcount").css({
+        height: (male_killed_count) / killed_count * 100 +'%'
+    })
+    $("#progressinjuredcount").css({
+        height: (male_injured_count) / injured_count * 100 +'%'
+    })
 }
 
 
+function thousands(num) {
+    var str = num.toString();
+    var reg = str.indexOf(".") > -1 ? /(\d)(?=(\d{3})+\.)/g : /(\d)(?=(?:\d{3})+$)/g;
+    return str.replace(reg, "$1,");
+}
 
