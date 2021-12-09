@@ -34,7 +34,7 @@ us_chart = function (us) {
         .attr("class", "states")
         .on("mouseover", function (d) {
             d3.select(this)
-                .style("fill", "red")
+                .style("fill", "#CC0000")
                 .style("cursor", "pointer");
         })
         .on("mouseout", function (d, i) {
@@ -51,39 +51,6 @@ us_chart = function (us) {
         .attr("stroke-linejoin", "round")
         .attr("d", path)
         .attr("class", "state-borders")
-
-
-    // const zoom = d3.zoom()
-    //     .scaleExtent([1, 8])
-    //     .on("zoom",  function (event) {
-    //         const {transform} = event;
-    //         g.attr("transform", transform);
-    //         g.attr("stroke-width", 1 / transform.k);
-    //       });
-    // svg.call(zoom)
-    // svg.on("click",function(){
-    //     states.transition().style("fill", null);
-    //     svg.transition().duration(750).call(
-    //       zoom.transform,
-    //       d3.zoomIdentity,
-    //       d3.zoomTransform(svg.node()).invert([width / 2, height / 2])
-    //     );
-    // })
-
-    // function clicked(event, d) {
-    //     const [[x0, y0], [x1, y1]] = path.bounds(d);
-    //     event.stopPropagation();
-    //     states.transition().style("fill", null);
-    //     d3.select(this).transition().style("fill", "red");
-    //     svg.transition().duration(750).call(
-    //       zoom.transform,
-    //       d3.zoomIdentity
-    //         .translate(width / 2, height / 2)
-    //         .scale(Math.min(8, 0.9 / Math.max((x1 - x0) / width, (y1 - y0) / height)))
-    //         .translate(-(x0 + x1) / 2, -(y0 + y1) / 2),
-    //       d3.pointer(event, svg.node())
-    //     );
-    //   }
 
     return svg
 }
@@ -104,19 +71,39 @@ gun_violence_chart = function (svg, gun) {
         .scale(1350)
         .translate([width / 2, height / 2]);
 
+
+            var tooltip = d3.select('body').append('div')
+            .attr('class', 'hidden tooltip');
+
     const radius = d3.scaleSqrt() // instead of scaleLinear()
         .domain([0, d3.max(gun, d => d.n_killed)])
         .range([0, 7])
     const g2 = svg.append("g")
         .attr("fill", "none")
-        .attr("stroke", "#7952b3");
+        .attr("stroke", "#7952b3")
+        .attr("stroke-width","0.8px")
 
     const dot = g2.selectAll("circle")
         .data(gun.filter(d => projection([d['longitude'], d['latitude']])))
         .enter()
         .append("circle")
         .attr("transform", d => `translate( ${projection([d['longitude'], d['latitude']])} )`)
-        .attr("r", radius(gun[0]['n_killed']));
+        .attr("r", radius(gun[0]['n_killed']))
+        .on("mousemover", function (d) {
+            console.log('-ijjoijiojoi')
+            var mouse = d3.mouse(svg.node()).map(function(d) {
+                return parseInt(d);
+            });
+            tooltip.classed('hidden', false)
+                .attr('style', 'left:' + (mouse[0] + 15) +
+                        'px; top:' + (mouse[1] - 35) + 'px')
+                .html(d.date);
+                
+        })
+        .on("mouseout", function (d) {
+            tooltip.classed('hidden', true);
+        })
+        ;
     let previousDate = -Infinity;
 
     return Object.assign(svg.node(), {
@@ -129,7 +116,9 @@ gun_violence_chart = function (svg, gun) {
                     return parseTime(d.date) > previousDate && parseTime(d.date) <= date
                 })
                 .attr("display", "block")
-                .transition().attr("r", d => radius(d.n_killed)).attr("fill", "red");
+                .transition().attr("r", d => radius(d.n_killed )).attr("fill", "#CC0000")
+                
+          
             dot // exit
                 .filter(d => parseTime(d.date) <= previousDate && parseTime(d.date) > date)
                 .attr("display", "none")

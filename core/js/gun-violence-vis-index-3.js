@@ -72,8 +72,8 @@ initData = function (gun) {
 
 draw_line_chart = function (gun) {
 
-    var width = 975;
-    var height = 600;
+    var width = 1200;
+    var height = 900;
     var margin = 100;
     var duration = 250;
 
@@ -179,7 +179,8 @@ draw_line_chart = function (gun) {
                 .attr("class", "text")
                 .text(d => 'In the year of ' + parseDate(d.date) + ', there were ' + d.value + ' ' + d.name + ' Events happened')
                 .attr("x", d => xScale(d.date) + 5)
-                .attr("y", d => yScale(d.value) - 10);
+                .attr("y", d => yScale(d.value) - 10)
+                ;
         })
         .on("mouseout", function (d) {
             d3.select(this)
@@ -241,11 +242,11 @@ draw_line_chart = function (gun) {
 
     /* Add Legend */
     svg.append("circle").attr("cx", 150).attr("cy", height - margin + 50).attr("r", 6).style("fill", color(0))
-    svg.append("circle").attr("cx", 250).attr("cy", height - margin + 50).attr("r", 6).style("fill", color(1))
-    svg.append("circle").attr("cx", 350).attr("cy", height - margin + 50).attr("r", 6).style("fill", color(2))
-    svg.append("text").attr("x", 170).attr("y", height - margin + 50).text("Mass Shooting").style("font-size", "10px").style("fill", "white").attr("alignment-baseline", "middle")
-    svg.append("text").attr("x", 270).attr("y", height - margin + 50).text("Officer Shooting").style("font-size", "10px").style("fill", "white").attr("alignment-baseline", "middle")
-    svg.append("text").attr("x", 370).attr("y", height - margin + 50).text("Drive-by").style("font-size", "10px").style("fill", "white").attr("alignment-baseline", "middle")
+    svg.append("circle").attr("cx", 400).attr("cy", height - margin + 50).attr("r", 6).style("fill", color(1))
+    svg.append("circle").attr("cx", 650).attr("cy", height - margin + 50).attr("r", 6).style("fill", color(2))
+    svg.append("text").attr("x", 170).attr("y", height - margin + 50).text("Mass Shooting").style("font-size", "14px").style("fill", "white").attr("alignment-baseline", "middle")
+    svg.append("text").attr("x", 420).attr("y", height - margin + 50).text("Officer Shooting").style("font-size", "14px").style("fill", "white").attr("alignment-baseline", "middle")
+    svg.append("text").attr("x", 670).attr("y", height - margin + 50).text("Drive-by").style("font-size", "14px").style("fill", "white").attr("alignment-baseline", "middle")
 
 }
 
@@ -290,53 +291,7 @@ initBarChartData = function (gun) {
             "Male": male_count,
             "Female": female_count
         })
-
-        // male_sus.push(
-        //     {
-        //         "date":formatDate(parseDate(ele)),
-        //         "gender":"Male",
-        //         "value": d3.sum(filtered_data, d => {
-        //             let type_arr = d.participant_type.split("||")
-        //             let gender_arr = d.participant_gender.split("||")
-        //             let count = 0;
-        //             gender_arr.forEach(element => {
-        //                 if(element.split("::")[1] ==="Male"){
-        //                     if( type_arr[element.split("::")[0]].split("::")[1] != "Victim"){
-        //                         count = count + 1
-        //                     }
-        //                 }
-        //             })
-        //             return count
-        //         })
-        //     }
-        // ) 
-        // female_sus.push(
-        //     {
-        //         "date":formatDate(parseDate(ele)),
-        //         "gender":"Female",
-        //         "value": d3.sum(filtered_data, d => {
-        //             let type_arr = d.participant_type.split("||")
-        //             let gender_arr = d.participant_gender.split("||")
-        //             let count = 0;
-        //             gender_arr.forEach(element => {
-        //                 if(element.split("::")[1] ==="Female"){
-        //                     if( type_arr[element.split("::")[0]].split("::")[1] != "Victim"){
-        //                         count = count + 1
-        //                     }
-        //                 }
-        //             })
-        //             return count
-        //         })
-        //     }
-        // ) 
     })
-    // let data = [
-    //     male_sus,
-
-
-    //         female_sus
-
-    // ]
     return sus_dict
 
 
@@ -345,8 +300,8 @@ initBarChartData = function (gun) {
 
 draw_bar_chart = function (gun) {
     var margin = { top: 30, right: 30, bottom: 70, left: 60 },
-        width = 960 - margin.left - margin.right,
-        height = 600 - margin.top - margin.bottom;
+        width = 1200 - margin.left - margin.right,
+        height = 900 - margin.top - margin.bottom;
 
     let data = initBarChartData(gun)
     // console.log(data)
@@ -366,7 +321,7 @@ draw_bar_chart = function (gun) {
         zDomain: gender,
         colors: d3.schemeSpectral[gender.length],
         width,
-        height: 600
+        height: height
     })
     //   console.log(chart)
     len = Legend(chart.scales.color, {title: "Suspect Number(Gender)"})
@@ -494,8 +449,8 @@ function legend({color, ...options}) {
 function Legend(color, {
     title,
     tickSize = 6,
-    width = 720, 
-    height = 44 + tickSize,
+    width = 820, 
+    height = 54 + tickSize,
     marginTop = 18,
     marginRight = 0,
     marginBottom = 16 + tickSize,
